@@ -42,7 +42,7 @@ jobs:
       - name: Login to OpenShift
         env:
           OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
-          OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+          OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN_LOGIN }}
         run: |
           echo "🔐 Iniciando sesión en OpenShift..."
           oc login $OPENSHIFT_SERVER \
