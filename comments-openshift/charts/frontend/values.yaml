@@ -1,2 +1,11 @@
-image: quay.io/tuusuario/frontend:latest
-replicas: 2
+replicaCount: 1
+image:
+  repository: mauriciotoapanta/frontend
+  tag: latest
+service:
+  type: ClusterIP
+  port: 8080
+route:
+  enabled: true
+  host: ""
+resources: {}

@@ -2,10 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
+  namespace: mauricio-tc-ec-dev
   labels:
     app: frontend
 spec:
-  replicas: {{ .Values.replicas }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: frontend
@@ -16,11 +17,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: {{ .Values.image }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: 8080
-          envFrom:
-            - configMapRef:
-                name: frontend-config
-            - secretRef:
-                name: frontend-secret
+          resources: {{ .Values.resources | toYaml }}
