@@ -1,0 +1,17 @@
+apiVersion: v2
+name: comments-system
+description: Sistema de comentarios desplegado en OpenShift
+version: 0.1.0
+dependencies:
+  - name: frontend
+    version: 0.1.0
+    repository: file://charts/frontend
+  - name: backend-api
+    version: 0.1.0
+    repository: file://charts/backend-api
+  - name: backend-data
+    version: 0.1.0
+    repository: file://charts/backend-data
+  - name: mongodb
+    version: 0.1.0
+    repository: file://charts/mongodb

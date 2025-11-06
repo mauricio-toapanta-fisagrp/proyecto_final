@@ -1,0 +1,14 @@
+frontend:
+  image: quay.io/tuusuario/frontend:latest
+  replicas: 2
+
+backend-api:
+  image: quay.io/tuusuario/backend-api:latest
+  replicas: 2
+
+backend-data:
+  image: quay.io/tuusuario/backend-data:latest
+  replicas: 1
+
+mongodb:
+  storageSize: 1Gi

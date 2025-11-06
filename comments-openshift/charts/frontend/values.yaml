@@ -1,0 +1,2 @@
+image: quay.io/tuusuario/frontend:latest
+replicas: 2
