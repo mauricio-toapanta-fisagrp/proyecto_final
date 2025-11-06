@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: mauriciotoapanta/backend-data
+  tag: latest
+service:
+  type: ClusterIP
+  port: 8081
+resources: {}
