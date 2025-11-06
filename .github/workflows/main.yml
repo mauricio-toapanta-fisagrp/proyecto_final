@@ -69,5 +69,5 @@ jobs:
           OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
         run: |
           echo "🚀 Desplegando release en el namespace: $OPENSHIFT_NAMESPACE"
-          helm upgrade --install proyecto_final charts/ --namespace $OPENSHIFT_NAMESPACE
+          helm upgrade --install proyecto-final charts/ --namespace $OPENSHIFT_NAMESPACE
           echo "✅ Despliegue completado correctamente"
