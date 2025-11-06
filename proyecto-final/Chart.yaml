@@ -6,13 +6,13 @@ type: application
 dependencies:
   - name: frontend
     version: 0.1.0
-    repository: "file://../frontend"
+    repository: "file://charts/frontend"
   - name: backend-api
     version: 0.1.0
-    repository: "file://../backend-api"
+    repository: "file://charts/backend-api"
   - name: backend-data
     version: 0.1.0
-    repository: "file://../backend-data"
+    repository: "file://charts/backend-data"
   - name: mongodb
     version: 0.1.0
-    repository: "file://../mongodb"
+    repository: "file://charts/mongodb"

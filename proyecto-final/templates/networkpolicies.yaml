@@ -67,7 +67,7 @@ metadata:
   name: deny-all-other-traffic
   namespace: {{ .Values.global.namespace }}
 spec:
-  podSelector: {}  # Aplica a todos los pods
+  podSelector: {}
   policyTypes:
     - Ingress
     - Egress
