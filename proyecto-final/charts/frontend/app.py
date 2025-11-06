@@ -1,18 +1,25 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify
 import requests
+import os
 
 app = Flask(__name__)
 
-BACKEND_API_URL = "http://backend-api:8080"
+# URL del backend-api, configurable por variable de entorno
+BACKEND_API_URL = os.getenv("BACKEND_API_URL", "http://backend-api:5000")
 
 @app.route("/")
 def index():
+    """
+    Endpoint principal del frontend.
+    Consulta al backend-api para obtener comentarios.
+    """
     try:
-        resp = requests.get(f"{BACKEND_API_URL}/data")
-        data = resp.json()
-    except Exception:
-        data = {"error": "No se pudo conectar al backend-api"}
-    return render_template("index.html", data=data)
+        response = requests.get(f"{BACKEND_API_URL}/comentarios")
+        comentarios = response.json()
+    except Exception as e:
+        comentarios = {"error": str(e)}
+
+    return jsonify(comentarios)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=80)

@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Sistema de Comentarios</title>
+      <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; background-color: #f0f0f0; }
+        h1 { color: #333; }
+        p { color: #555; }
+        .comment { background-color: #fff; border: 1px solid #ddd; padding: 1rem; margin-bottom: 1rem; border-radius: 5px; }
+      </style>
+    </head>
+    <body>
+      <h1>Bienvenido al Frontend del Sistema de Comentarios</h1>
+      <p>Este frontend consume el backend-api para mostrar los comentarios.</p>
+
+      <div class="comment">
+        <strong>Usuario:</strong> Juan Pérez<br>
+        <strong>Comentario:</strong> ¡Hola! Esto es un comentario de ejemplo.
+      </div>
+
+      <div class="comment">
+        <strong>Usuario:</strong> María López<br>
+        <strong>Comentario:</strong> ¡Este es otro comentario de ejemplo!
+      </div>
+
+      <footer>
+        <p>© 2025 Sistema de Comentarios</p>
+      </footer>
+    </body>
+    </html>

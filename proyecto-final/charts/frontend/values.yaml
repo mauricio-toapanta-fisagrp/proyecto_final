@@ -1,11 +1,9 @@
 replicaCount: 1
+
 image:
   repository: mauriciotoapanta/frontend
   tag: latest
+
 service:
   type: ClusterIP
-  port: 8080
-route:
-  enabled: true
-  host: ""
-resources: {}
+  port: 80
