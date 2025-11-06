@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # ---------- CHECKOUT REPO ----------
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -38,6 +39,12 @@ jobs:
           docker build -t mauriciotoapanta/backend-data:latest ./charts/backend-data
           docker push mauriciotoapanta/backend-data:latest
 
+      # ---------- INSTALL OPENSHIFT CLI ----------
+      - name: Install OpenShift CLI
+        uses: redhat-actions/oc-installer@v1
+        with:
+          version: 'latest'
+
       # ---------- LOGIN TO OPENSHIFT ----------
       - name: Login to OpenShift
         env:
@@ -48,6 +55,7 @@ jobs:
           oc login $OPENSHIFT_SERVER \
             --token=$OPENSHIFT_TOKEN \
             --insecure-skip-tls-verify=true
+          echo "✅ Login exitoso en OpenShift"
 
       # ---------- SETUP HELM ----------
       - name: Setup Helm
@@ -62,3 +70,4 @@ jobs:
         run: |
           echo "🚀 Desplegando release en el namespace: $OPENSHIFT_NAMESPACE"
           helm upgrade --install proyecto_final charts/ --namespace $OPENSHIFT_NAMESPACE
+          echo "✅ Despliegue completado correctamente"
