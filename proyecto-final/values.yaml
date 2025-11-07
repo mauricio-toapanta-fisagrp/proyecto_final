@@ -12,5 +12,5 @@ backend-data:
     tag: latest
 mongodb:
   image:
-    repository: mongo
+    repository: mauriciotoapanta/mongodb
     tag: 6
