@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: mongo
+  repository: mauriciotoapanta/mongodb
   tag: latest
 service:
   type: ClusterIP

@@ -9,11 +9,61 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    env:
+      REGISTRY: docker.io
+      DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+      OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
+      OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+      OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
     steps:
       # 1️⃣ Obtener el código
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      # 1️⃣ Docker Hub
+      # ----------------------------
+      # 🔐 LOGIN DOCKER HUB
+      # ----------------------------
+      - name: "🔐 Iniciar sesión en Docker Hub"
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u $DOCKERHUB_USER --password-stdin
+
+      # ----------------------------
+      # 🧱 BUILD Y PUSH IMÁGENES DEL PROYECTO
+      # ----------------------------
+
+      - name: "🐍 Construir y subir imagen Backend-Data"
+        run: |
+          docker build -t $DOCKERHUB_USER/backend-data:latest ./backend-data
+          docker push $DOCKERHUB_USER/backend-data:latest
+
+      - name: "🐍 Construir y subir imagen Backend-API"
+        run: |
+          docker build -t $DOCKERHUB_USER/backend-api:latest ./backend-api
+          docker push $DOCKERHUB_USER/backend-api:latest
+
+      - name: "🐍 Construir y subir imagen Frontend (Flask)"
+        run: |
+          docker build -t $DOCKERHUB_USER/frontend:latest ./frontend
+          docker push $DOCKERHUB_USER/frontend:latest
+
+      # ----------------------------
+      # 🧱 PREPARAR IMAGEN MONGODB PERSONALIZADA
+      # ----------------------------
+      - name: "🧱 Verificar o subir imagen MongoDB personalizada"
+        run: |
+          IMAGE_NAME="$DOCKERHUB_USER/mongodb:6"
+          echo "🔍 Verificando existencia de $IMAGE_NAME en Docker Hub..."
+          
+          # Intentar obtener metadata desde el registro
+          if curl --silent -f -lSL "https://hub.docker.com/v2/repositories/$DOCKERHUB_USER/mongodb/tags/6/" > /dev/null 2>&1; then
+            echo "✅ Imagen ya existe en Docker Hub. No se reconstruye."
+          else
+            echo "📦 Construyendo y subiendo imagen MongoDB personalizada..."
+            docker pull mongo:6
+            docker tag mongo:6 $IMAGE_NAME
+            docker push $IMAGE_NAME
+          fi
 
       # 2️⃣ Instalar Helm
       - name: Setup Helm
