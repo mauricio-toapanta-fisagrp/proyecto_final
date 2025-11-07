@@ -34,17 +34,17 @@ jobs:
 
       - name: "🐍 Construir y subir imagen Backend-Data"
         run: |
-          docker build -t $DOCKERHUB_USER/backend-data:latest ./backend-data
+          docker build -t $DOCKERHUB_USER/backend-data:latest ./proyecto-final/charts/backend-data
           docker push $DOCKERHUB_USER/backend-data:latest
 
       - name: "🐍 Construir y subir imagen Backend-API"
         run: |
-          docker build -t $DOCKERHUB_USER/backend-api:latest ./backend-api
+          docker build -t $DOCKERHUB_USER/backend-api:latest ./proyecto-final/charts/backend-api
           docker push $DOCKERHUB_USER/backend-api:latest
 
       - name: "🐍 Construir y subir imagen Frontend (Flask)"
         run: |
-          docker build -t $DOCKERHUB_USER/frontend:latest ./frontend
+          docker build -t $DOCKERHUB_USER/frontend:latest ./proyecto-final/charts/frontend
           docker push $DOCKERHUB_USER/frontend:latest
 
       # ----------------------------
