@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: mauriciotoapanta/mongodb
-  tag: latest
+  tag: 6
 service:
   type: ClusterIP
   port: 27017
