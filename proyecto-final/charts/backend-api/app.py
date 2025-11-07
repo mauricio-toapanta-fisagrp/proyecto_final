@@ -1,18 +1,17 @@
-from fastapi import FastAPI
-import requests
+from flask import Flask, jsonify
+import requests, os
 
-app = FastAPI()
-BACKEND_DATA_URL = "http://backend-data:8081"
+app = Flask(__name__)
+BACKEND_DATA_URL = os.getenv("BACKEND_DATA_URL", "http://backend-data:5001")
 
-@app.get("/")
-def root():
-    return {"message": "backend-api funcionando correctamente"}
-
-@app.get("/data")
-def get_data():
+@app.route("/comentarios")
+def comentarios():
     try:
-        resp = requests.get(f"{BACKEND_DATA_URL}/info")
-        data = resp.json()
-    except Exception:
-        data = {"error": "No se pudo conectar a backend-data"}
-    return data
+        r = requests.get(f"{BACKEND_DATA_URL}/datos")
+        data = r.json()
+    except Exception as e:
+        data = {"error": str(e)}
+    return jsonify(data)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)

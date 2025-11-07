@@ -1,4 +1,5 @@
 apiVersion: v2
 name: mongodb
-version: 0.1.0
 description: Base de datos MongoDB con PVC
+type: application
+version: 0.1.0

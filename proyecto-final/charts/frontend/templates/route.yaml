@@ -2,7 +2,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: frontend
-  namespace: mauricio-tc-ec-dev
+  namespace: {{ .Release.Namespace }}
 spec:
   to:
     kind: Service

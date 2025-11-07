@@ -1,22 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: backend-data
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: backend-data
   template:
     metadata:
       labels:
-        app: frontend
+        app: backend-data
     spec:
       containers:
-        - name: frontend
+        - name: backend-data
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           ports:
-            - containerPort: 80
+            - containerPort: 5001
           env:
-            - name: BACKEND_API_URL
-              value: "http://backend-api:5000"
+            - name: MONGO_URI
+              value: "mongodb://mongodb:27017/comentarios"

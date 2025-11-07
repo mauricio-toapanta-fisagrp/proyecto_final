@@ -1,18 +1,16 @@
-from fastapi import FastAPI
+from flask import Flask, jsonify
 from pymongo import MongoClient
 import os
 
-app = FastAPI()
-MONGO_URL = "mongodb://mongodb:27017"
+app = Flask(__name__)
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://mongodb:27017/comentarios")
+client = MongoClient(MONGO_URI)
+db = client.get_database()
 
-client = MongoClient(MONGO_URL)
-db = client.comments_db
-collection = db.comments
+@app.route("/datos")
+def datos():
+    comentarios = list(db.comentarios.find({}, {"_id": 0}))
+    return jsonify(comentarios)
 
-@app.get("/info")
-def info():
-    try:
-        count = collection.count_documents({})
-        return {"comments_count": count}
-    except Exception:
-        return {"error": "No se pudo conectar a MongoDB"}
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5001)

@@ -1,41 +1,16 @@
-global:
-  namespace: mauricio-tc-ec-dev
-  project: proyecto-final
-
 frontend:
   image:
     repository: mauriciotoapanta/frontend
     tag: latest
-  service:
-    port: 8080
-  env:
-    BACKEND_API_URL: http://backend-api:8080
-
 backend-api:
   image:
     repository: mauriciotoapanta/backend-api
     tag: latest
-  service:
-    port: 8080
-  env:
-    BACKEND_DATA_URL: http://backend-data:8081
-
 backend-data:
   image:
     repository: mauriciotoapanta/backend-data
     tag: latest
-  service:
-    port: 8081
-  env:
-    DATABASE_URL: mongodb://mongodb:27017/comentarios
-
 mongodb:
   image:
     repository: mongo
-    tag: latest
-  persistence:
-    enabled: true
-    accessMode: ReadWriteOnce
-    size: 1Gi
-  service:
-    port: 27017
+    tag: 6

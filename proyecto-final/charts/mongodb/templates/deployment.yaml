@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongodb
-  namespace: mauricio-tc-ec-dev
+  namespace: {{ .Release.Namespace }}
   labels:
     app: mongodb
 spec:

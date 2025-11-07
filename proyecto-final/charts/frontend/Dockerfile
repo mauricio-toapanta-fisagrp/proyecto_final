@@ -1,12 +1,7 @@
-FROM python:3.11-slim
-
+FROM python:3.10-slim
 WORKDIR /app
-
-COPY app.py /app/
-COPY static /app/static
-
-RUN pip install flask
-
+COPY app.py .
+RUN pip install flask requests
 EXPOSE 80
-
 CMD ["python", "app.py"]
+

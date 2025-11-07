@@ -1,4 +1,5 @@
 apiVersion: v2
 name: backend-api
+description: API Flask que conecta frontend con backend-data
+type: application
 version: 0.1.0
-description: Backend API para sistema de comentarios
